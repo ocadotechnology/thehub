@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <script src="js/exposedFunctionsHandler.js"></script>
+</head>
+<body>
+
+<div id="container">
+
+    <h3>Windows communication via postMessage hidden from the developers</h3>
+    <p id="data"></p>
+    <div id="childContainer"></div>
+
+    <script>
+
+        function log(message) { //util method
+            document.getElementById('data').innerHTML += message + '<br /><br />';
+        }
+
+        // some sample methods we want to expose to child frames
+        function someMethodWithVariable(someVarable){
+            log("someParametrizedMethod called with someVarable: "+someVarable);
+            return "value returned from someMethodWithVariable for "+someVarable;
+        }
+
+
+        function someMethodWithoutVariable(){
+
+            log("someMethodWithoutVariable called");
+            return "value returned from someMethodWithoutVariable";
+        }
+
+
+        function someMethodWithoutReturnValue(){
+            log("someMethodWithoutReturn called");
+        }
+
+        // lets register them and hence expose to child frames
+        registerFunction(someMethodWithVariable, someMethodWithoutVariable, someMethodWithoutReturnValue);
+    </script>
+
+    <!-- lets load some child iframe -->
+    <script src="js/childIframeLoader.js"></script>
+
+</div>
+</body>
+</html>

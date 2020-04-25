@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Child frame</title>
+
+    <!--    sdk library would be available/exposed via cdn to child frames-->
+    <script src="js/sdk.0.1.js"></script>
+</head>
+<body>
+
+<p id="data"></p>
+<script >
+	function log(message) { //util method
+		document.getElementById('data').innerHTML += message + '<br /><br />';
+	}
+	
+	
+    theHub.onReady(async () => {
+
+        log("response: "+await theHub.someMethodWithVariable("Antonio"));
+
+        log("response: "+await theHub.someMethodWithoutVariable());
+        log("response: "+await theHub.someMethodWithoutReturnValue());
+
+    })
+</script>
+</body>
+</html>
